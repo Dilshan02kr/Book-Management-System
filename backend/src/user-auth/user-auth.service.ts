@@ -3,10 +3,12 @@ import { User } from './entities/user.entity';
 import { RegisterInput } from './dto/register.input';
 import { LoginInput } from './dto/login.input';
 import { AuthPayload } from './dto/auth-payload';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserAuthService {
   private users: User[] = [];
+  constructor(private jwtService: JwtService) {}
 
   register(data: RegisterInput): boolean {
     const userExists = this.users.find(
@@ -31,8 +33,12 @@ export class UserAuthService {
     );
 
     if (!user) throw new UnauthorizedException('Invalid credentials');
+    
+    const payload = { username: user.username, sub: user.id };
+    const token = this.jwtService.sign(payload);
+
     return {
-      token: 'fake-token-123',
+      token,
       user,
     };
   }
