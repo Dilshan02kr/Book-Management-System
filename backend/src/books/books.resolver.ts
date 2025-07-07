@@ -18,8 +18,8 @@ export class BooksResolver {
   }
 
   @Mutation(() => Book)
-  createBook(@Args('data') data: AddBookInput) {
-    return this.booksService.create(data);
+  addBook(@Args('data') data: AddBookInput) {
+    return this.booksService.addBook(data);
   }
 
   @Mutation(() => Book)

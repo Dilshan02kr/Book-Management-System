@@ -16,7 +16,7 @@ export class BooksService {
     return book;
   }
 
-  create(addBookInput: AddBookInput): Book {
+  addBook(addBookInput: AddBookInput): Book {
     const newBook: Book = {
       id: Date.now().toString(),
       ...addBookInput,
