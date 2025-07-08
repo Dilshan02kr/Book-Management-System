@@ -3,6 +3,7 @@
 import { Typography, Container, Box, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
+import AuthNavIcon from '@/components/authNavIcon/AuthNavIcon';
 
 export default function Page() {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function Page() {
         minHeight="100vh"
         textAlign="center"
       >
+        <AuthNavIcon />
         <Typography variant="h2" gutterBottom>
           📚 Welcome to Book Management System
         </Typography>

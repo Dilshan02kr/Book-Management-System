@@ -1,5 +1,5 @@
 import { Roboto } from 'next/font/google';
-import Providers from '@/components/providers/Providers';
+import Providers from '@/wrappers/Providers';
 import './globals.css';
 
 const roboto = Roboto({

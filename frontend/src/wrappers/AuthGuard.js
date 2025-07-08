@@ -1,0 +1,50 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import useAuth from '@/hooks/useAuth';
+import { Box, Typography, CircularProgress } from '@mui/material';
+
+function AuthGuard({ children }) {
+  const { isAuthenticated, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [loading, isAuthenticated, router]);
+
+  return (
+    <Box position="fixed" top={0} left={0} right={0} bottom={0}>
+      {children}
+
+      {loading && (
+        <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 9999,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backdropFilter: 'blur(2px)',
+          }}
+>
+          <Box textAlign="center">
+            <CircularProgress color="primary" />
+            <Typography mt={2} variant="h6">
+            Loading...
+            </Typography>
+          </Box>
+        </div>
+      )}
+    </Box>
+  );
+}
+
+export default AuthGuard;
