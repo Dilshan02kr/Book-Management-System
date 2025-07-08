@@ -1,12 +1,23 @@
-'use client';
+"use client";
 
-import { Container, Box, Typography } from '@mui/material';
-import BookForm from '@/components/bookForm/BookForm';
+import { Container, Box, Typography } from "@mui/material";
+import BookForm from "@/components/bookForm/BookForm";
+import { addBook } from "@/services/bookService";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const handleAddBook = (data) => {
-    console.log('📘 Add book:', data);
-    // 🔜 Trigger GraphQL mutation to add book
+
+const router = useRouter();
+
+  const handleAddBook = async (data) => {
+    const result = await addBook(data);
+
+    if (result.success) {
+      alert("✅ Book added!");
+      router.push("/books");
+    } else {
+      alert("❌ Error: " + result.error);
+    }
   };
 
   return (
