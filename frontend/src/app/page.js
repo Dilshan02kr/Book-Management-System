@@ -1,9 +1,22 @@
 'use client';
 
 import { Typography, Container, Box, Button } from '@mui/material';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import useAuth from '@/hooks/useAuth';
 
-export default function HomePage() {
+export default function Page() {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
+
+  const handleGoToBooks = () => {
+    if (isAuthenticated) {
+      router.push('/books');
+    } else {
+      alert('🔐 Please login to access the book list.');
+      router.push('/login');
+    }
+  };
+
   return (
     <Container maxWidth="md">
       <Box
@@ -21,11 +34,9 @@ export default function HomePage() {
           Easily manage your books with create, update, and search features.
         </Typography>
         <Box mt={4}>
-          <Link href="/books" passHref>
-            <Button variant="contained" color="primary">
-              Go to Book List
-            </Button>
-          </Link>
+          <Button variant="contained" color="primary" onClick={handleGoToBooks}>
+            Go to Book List
+          </Button>
         </Box>
       </Box>
     </Container>
