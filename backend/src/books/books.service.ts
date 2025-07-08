@@ -18,9 +18,6 @@ export class BooksService {
 
   getBooksByUser(userId: string): Book[] {
     const userBooks = this.books.filter((book) => book.userId === userId);
-    if (userBooks.length === 0) {
-      throw new NotFoundException(`No books found for user with id ${userId}`);
-    }
     return userBooks;
   }
 

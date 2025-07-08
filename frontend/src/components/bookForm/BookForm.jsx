@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Box, TextField, Button } from "@mui/material";
+import MyButton from "../myButton/MyButton";
 
 export default function BookForm({
   initialData = {
@@ -13,6 +14,7 @@ export default function BookForm({
   },
   onSubmit,
   isEdit = false,
+  loading = false,
 }) {
   const [formData, setFormData] = useState(initialData);
 
@@ -72,9 +74,13 @@ export default function BookForm({
           required
           fullWidth
         />
-        <Button variant="contained" color="primary" type="submit">
-          {isEdit ? "✏️ Update Book" : "📥 Add Book"}
-        </Button>
+
+
+        <MyButton
+          name={isEdit ? "✏️ Update Book" : "📥 Add Book"}
+          type="submit"
+          loading={loading}
+        />
       </Box>
     </form>
   );
