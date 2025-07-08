@@ -1,16 +1,9 @@
-"use client";
+'use client';
 
 import { useState } from "react";
-import {
-  Container,
-  Typography,
-  Box,
-  TextField,
-  Button,
-  Link as MuiLink,
-} from "@mui/material";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import AuthForm from "@/components/authForm/AuthForm";
+import { registerUser } from "@/services/authService";
 
 export default function Page() {
   const router = useRouter();
@@ -18,68 +11,30 @@ export default function Page() {
     username: "",
     password: "",
   });
+  const [error, setError] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("👤 Registering:", formData);
 
-    router.push("/login");
+    const result = await registerUser(formData);
+
+    if (result.success) {
+      setTimeout(() => router.push('/login'), 1500);
+    } else {
+      setError('❌ Registration failed. Username might be taken.');
+    }
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box mt={8}>
-        <Typography variant="h4" gutterBottom align="center">
-          📝 Register
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <Box display="flex" flexDirection="column" gap={3}>
-            <TextField
-              label="Username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-              fullWidth
-            />
-            <TextField
-              label="Password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              fullWidth
-            />
-            <Button type="submit" variant="contained" color="primary">
-              Register
-            </Button>
-          </Box>
-        </form>
-
-        <Box mt={3} textAlign="center">
-          <Typography variant="body2">
-            Already have an account?{" "}
-            <Link href="/login">
-              <Typography
-                color="primary"
-                component="span"
-                sx={{ cursor: "pointer", textDecoration: "underline" }}
-              >
-                Log in
-              </Typography>
-            </Link>
-          </Typography>
-        </Box>
-      </Box>
-    </Container>
+    <AuthForm
+      title="📝 Register"
+      formData={formData}
+      setFormData={setFormData}
+      onSubmit={handleSubmit}
+      buttonText="Register"
+      bottomText="Already have an account?"
+      linkText="Log in"
+      linkHref="/login"
+    />
   );
 }
