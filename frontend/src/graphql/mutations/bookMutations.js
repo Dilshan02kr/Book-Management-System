@@ -11,3 +11,15 @@ export const ADD_BOOK = gql`
     }
   }
 `;
+
+export const UPDATE_BOOK = gql`
+mutation UpdateBook($id: ID!, $data: AddBookInput!){
+updateBook(id: $id, data:$data){
+id
+title
+author
+year
+genre
+}
+
+}`;
