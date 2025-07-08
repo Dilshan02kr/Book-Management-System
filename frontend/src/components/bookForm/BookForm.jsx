@@ -5,6 +5,7 @@ import { Box, TextField, Button } from "@mui/material";
 
 export default function BookForm({
   initialData = {
+    userId: "",
     title: "",
     author: "",
     year: "",
@@ -25,9 +26,11 @@ export default function BookForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+     const storedUser = localStorage.getItem('user');
     const dataToSubmit = {
       ...formData,
       year: parseInt(formData.year, 10),
+      userId: JSON.parse(storedUser).id,
     };
 
     onSubmit(dataToSubmit);

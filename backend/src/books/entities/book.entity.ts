@@ -5,6 +5,9 @@ export class Book {
   @Field(() => ID)
   id: string;
 
+  @Field()
+  userId: string;
+
   @Field() 
   title: string;
 

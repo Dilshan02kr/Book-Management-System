@@ -14,7 +14,7 @@ import {
   Divider,
 } from "@mui/material";
 import Link from "next/link";
-import { getBooks } from "@/services/bookService";
+import { getBooks, getBooksByUser } from "@/services/bookService";
 
 export default function Page() {
   const [books, setBooks] = useState([]);
@@ -23,7 +23,8 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchBooks() {
-      const result = await getBooks();
+      const storedUser = localStorage.getItem("user");
+      const result = await getBooksByUser(JSON.parse(storedUser).id);
       if (result.success) {
         setBooks(result.books);
       } else {

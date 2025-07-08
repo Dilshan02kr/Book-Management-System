@@ -12,6 +12,18 @@ export const GET_BOOKS = gql`
   }
 `;
 
+export const GET_USER_BOOKS = gql`
+  query GetUserBooks($userId: ID!) {
+    booksByUser(userId: $userId) {
+      id
+      title
+      author
+      genre
+      year
+    }
+  }
+`;
+
 export const GET_BOOK_BY_ID = gql`
   query GetBookById($id: ID!) {
     book(id: $id) {

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ID, Context } from '@nestjs/graphql';
 import { BooksService } from './books.service';
 import { Book } from './entities/book.entity';
 import { AddBookInput } from './dto/add-book.input';
@@ -18,6 +18,11 @@ export class BooksResolver {
   @Query(() => Book, { name: 'book' })
   findOne(@Args('id', { type: () => ID }) id: string) {
     return this.booksService.findOne(id);
+  }
+
+  @Query(() => [Book], { name: 'booksByUser' })
+  getBooksByUser(@Args('userId', { type: () => ID }) userId: string): Book[] {
+    return this.booksService.getBooksByUser(userId);
   }
 
   @Mutation(() => Book)
