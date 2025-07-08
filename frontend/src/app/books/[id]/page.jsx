@@ -1,7 +1,7 @@
 'use client';
 
 import { use, useEffect, useState } from 'react';
-import { getBookById } from '@/services/bookService';
+import { deleteBookById, getBookById } from '@/services/bookService';
 import { useRouter } from 'next/navigation';
 import {
   Container,
@@ -36,8 +36,13 @@ export default function Page({ params }) {
     fetchBook();
   }, [id]);
 
-  const handleDelete = () => {
-    alert('⚠️ Delete functionality not yet implemented.');
+  const handleDelete = async () => {
+    const result = await deleteBookById(id);
+    if (result.success) {
+      router.push("/books");
+    } else {
+      setError(result.error);
+    }
   };
 
   const handleEdit = () => {

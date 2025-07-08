@@ -23,3 +23,9 @@ genre
 }
 
 }`;
+
+export const DELETE_BOOK = gql`
+  mutation DeleteBook($id: ID!) {
+    removeBook(id: $id)
+  }
+`;

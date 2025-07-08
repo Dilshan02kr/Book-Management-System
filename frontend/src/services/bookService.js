@@ -1,4 +1,4 @@
-import { ADD_BOOK, UPDATE_BOOK } from "@/graphql/mutations/bookMutations";
+import { ADD_BOOK, DELETE_BOOK, UPDATE_BOOK } from "@/graphql/mutations/bookMutations";
 import { GET_BOOK_BY_ID, GET_BOOKS } from "@/graphql/queries/bookQueries";
 import { client } from "@/lib/apolloClient";
 
@@ -82,6 +82,27 @@ export const updateBookById = async (id, bookData) => {
     return { success: true, book: result.data.updateBook };
   } catch (error) {
     console.error("❌ Error updating book:", error.message);
+    return { success: false, error: error.message };
+  }
+};
+
+export const deleteBookById = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await client.mutate({
+      mutation: DELETE_BOOK,
+      variables: { id },
+      context: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("❌ Error deleting book:", error.message);
     return { success: false, error: error.message };
   }
 };
