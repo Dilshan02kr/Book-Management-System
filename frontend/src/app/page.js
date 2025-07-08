@@ -1,39 +1,33 @@
 'use client';
 
-import { gql, useQuery } from '@apollo/client';
-import { Container, Typography, List, ListItem, ListItemText } from '@mui/material';
-
-const GET_BOOKS = gql`
-  query {
-    books {
-      id
-      title
-      author
-      year
-      genre
-    }
-  }
-`;
+import { Typography, Container, Box, Button } from '@mui/material';
+import Link from 'next/link';
 
 export default function HomePage() {
-  const { loading, error, data } = useQuery(GET_BOOKS);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
-    <Container maxWidth="md" style={{ paddingTop: '2rem' }}>
-      <Typography variant="h4" gutterBottom>📚 Book List</Typography>
-      <List>
-        {data.books.map(book => (
-          <ListItem key={book.id}>
-            <ListItemText
-              primary={`${book.title} (${book.year})`}
-              secondary={`By ${book.author} • Genre: ${book.genre}`}
-            />
-          </ListItem>
-        ))}
-      </List>
+    <Container maxWidth="md">
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+        textAlign="center"
+      >
+        <Typography variant="h2" gutterBottom>
+          📚 Welcome to Book Management System
+        </Typography>
+        <Typography variant="h6" gutterBottom>
+          Easily manage your books with create, update, and search features.
+        </Typography>
+        <Box mt={4}>
+          <Link href="/books" passHref>
+            <Button variant="contained" color="primary">
+              Go to Book List
+            </Button>
+          </Link>
+        </Box>
+      </Box>
     </Container>
   );
 }
