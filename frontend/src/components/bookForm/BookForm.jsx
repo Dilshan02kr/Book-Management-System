@@ -7,7 +7,7 @@ export default function BookForm({
   initialData = {
     title: "",
     author: "",
-    publishedYear: "",
+    year: "",
     genre: "",
   },
   onSubmit,
@@ -25,7 +25,12 @@ export default function BookForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    const dataToSubmit = {
+      ...formData,
+      year: parseInt(formData.year, 10),
+    };
+
+    onSubmit(dataToSubmit);
   };
 
   return (
@@ -49,9 +54,9 @@ export default function BookForm({
         />
         <TextField
           label="Published Year"
-          name="publishedYear"
+          name="year"
           type="number"
-          value={formData.publishedYear}
+          value={formData.year}
           onChange={handleChange}
           required
           fullWidth
