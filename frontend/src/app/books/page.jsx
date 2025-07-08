@@ -3,7 +3,16 @@
 import { useEffect, useState } from "react";
 import AuthNavIcon from "@/components/authNavIcon/AuthNavIcon";
 import AuthGuard from "@/wrappers/AuthGuard";
-import { Typography, Container, Box, Button, List, ListItem, ListItemText, Divider } from "@mui/material";
+import {
+  Typography,
+  Container,
+  Box,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
 import Link from "next/link";
 import { getBooks } from "@/services/bookService";
 
@@ -63,7 +72,16 @@ export default function Page() {
             <List>
               {books.map((book) => (
                 <Box key={book.id}>
-                  <ListItem alignItems="flex-start">
+                  <ListItem
+                    alignItems="flex-start"
+                    secondaryAction={
+                      <Link href={`/books/${book.id}`}>
+                        <Button variant="contained" color="primary">
+                          View
+                        </Button>
+                      </Link>
+                    }
+                  >
                     <ListItemText
                       primary={`${book.title} (${book.year})`}
                       secondary={`Author: ${book.author} | Genre: ${book.genre}`}
