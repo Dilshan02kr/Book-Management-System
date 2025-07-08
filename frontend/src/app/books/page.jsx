@@ -15,6 +15,9 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { getBooks, getBooksByUser } from "@/services/bookService";
+import LoadingEffect from "@/components/loadingEffect/loadingEffect";
+import EmptyMessage from "@/components/emptyMessage/EmptyMessage";
+import MyButton from "@/components/myButton/MyButton";
 
 export default function Page() {
   const [books, setBooks] = useState([]);
@@ -43,7 +46,7 @@ export default function Page() {
       <Container maxWidth="md">
         <Box mt={6} mb={4} textAlign="center">
           <Typography variant="h3" gutterBottom>
-            📚 Book List
+            📚 My Books
           </Typography>
           <Typography variant="subtitle1">
             Browse and manage all your books.
@@ -51,11 +54,7 @@ export default function Page() {
         </Box>
 
         <Box>
-          {loading && (
-            <Typography variant="body1" color="textSecondary">
-              Loading books...
-            </Typography>
-          )}
+          {loading && <LoadingEffect text="Loading your books..." />}
 
           {error && (
             <Typography variant="body1" color="error">
@@ -64,22 +63,18 @@ export default function Page() {
           )}
 
           {!loading && !error && books.length === 0 && (
-            <Typography variant="body1" color="textSecondary">
-              No books found.
-            </Typography>
+            <EmptyMessage text="No books found." />
           )}
 
           {!loading && !error && books.length > 0 && (
-            <List>
+            <List className="book-list">
               {books.map((book) => (
                 <Box key={book.id}>
                   <ListItem
                     alignItems="flex-start"
                     secondaryAction={
                       <Link href={`/books/${book.id}`}>
-                        <Button variant="contained" color="primary">
-                          View
-                        </Button>
+                        <MyButton name="View" />
                       </Link>
                     }
                   >
@@ -97,9 +92,7 @@ export default function Page() {
 
         <Box mt={4} textAlign="center">
           <Link href="/books/add">
-            <Button variant="contained" color="primary">
-              ➕ Add New Book
-            </Button>
+            <MyButton name="➕ Add New Book" />
           </Link>
         </Box>
       </Container>

@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-import useAuth from '@/hooks/useAuth';
-import { Box, Typography, CircularProgress } from '@mui/material';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import React from "react";
+import useAuth from "@/hooks/useAuth";
+import { Box, Typography, CircularProgress } from "@mui/material";
+import LoadingEffect from "@/components/loadingEffect/loadingEffect";
 
 function AuthGuard({ children }) {
   const { isAuthenticated, loading } = useAuth();
@@ -12,7 +13,7 @@ function AuthGuard({ children }) {
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [loading, isAuthenticated, router]);
 
@@ -21,26 +22,22 @@ function AuthGuard({ children }) {
       {children}
 
       {loading && (
-        <div style={{
-            position: 'absolute',
+        <div
+          style={{
+            position: "absolute",
             top: 0,
             left: 0,
             zIndex: 9999,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backdropFilter: 'blur(2px)',
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backdropFilter: "blur(2px)",
           }}
->
-          <Box textAlign="center">
-            <CircularProgress color="primary" />
-            <Typography mt={2} variant="h6">
-            Loading...
-            </Typography>
-          </Box>
+        >
+          <LoadingEffect text="Authenticating..." />
         </div>
       )}
     </Box>

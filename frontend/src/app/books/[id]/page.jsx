@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { use, useEffect, useState } from 'react';
-import { deleteBookById, getBookById } from '@/services/bookService';
-import { useRouter } from 'next/navigation';
+import { use, useEffect, useState } from "react";
+import { deleteBookById, getBookById } from "@/services/bookService";
+import { useRouter } from "next/navigation";
 import {
   Container,
   Box,
@@ -11,8 +11,9 @@ import {
   CircularProgress,
   Alert,
   Divider,
-} from '@mui/material';
-import Link from 'next/link';
+} from "@mui/material";
+import Link from "next/link";
+import LoadingEffect from "@/components/loadingEffect/loadingEffect";
 
 export default function Page({ params }) {
   const { id } = use(params);
@@ -56,7 +57,7 @@ export default function Page({ params }) {
           📖 Book Details
         </Typography>
 
-        {loading && <CircularProgress />}
+        {loading && <LoadingEffect text="Loading book details..." />}
         {error && <Alert severity="error">Error: {error}</Alert>}
 
         {book && (
@@ -66,9 +67,15 @@ export default function Page({ params }) {
             </Typography>
             <Divider sx={{ mb: 2 }} />
 
-            <Typography><strong>Author:</strong> {book.author}</Typography>
-            <Typography><strong>Published Year:</strong> {book.year}</Typography>
-            <Typography><strong>Genre:</strong> {book.genre}</Typography>
+            <Typography>
+              <strong>Author:</strong> {book.author}
+            </Typography>
+            <Typography>
+              <strong>Published Year:</strong> {book.year}
+            </Typography>
+            <Typography>
+              <strong>Genre:</strong> {book.genre}
+            </Typography>
 
             <Box mt={4} display="flex" justifyContent="space-between">
               <Link href={`/books/${book.id}/update`}>
@@ -80,14 +87,15 @@ export default function Page({ params }) {
                 🗑 Delete
               </Button>
             </Box>
-
-            <Box mt={4} textAlign="center">
-              <Link href="/books">
-                <Button variant="contained" color="secondary">⬅ Back to Books</Button>
-              </Link>
-            </Box>
           </Box>
         )}
+        <Box mt={4} textAlign="center">
+          <Link href="/books">
+            <Button variant="contained" color="secondary">
+              ⬅ Back to Books
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Container>
   );
