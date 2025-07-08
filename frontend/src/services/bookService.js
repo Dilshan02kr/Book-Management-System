@@ -1,5 +1,5 @@
 import { ADD_BOOK, DELETE_BOOK, UPDATE_BOOK } from "@/graphql/mutations/bookMutations";
-import { GET_BOOK_BY_ID, GET_BOOKS } from "@/graphql/queries/bookQueries";
+import { GET_BOOK_BY_ID, GET_BOOKS, GET_USER_BOOKS } from "@/graphql/queries/bookQueries";
 import { client } from "@/lib/apolloClient";
 
 export const addBook = async (bookData) => {
@@ -64,6 +64,28 @@ export const getBookById = async (id) => {
     return { success: false, error: error.message };
   }
 };
+
+export const getBooksByUser = async (userId) => {
+  try {
+    const token = localStorage.getItem('token');
+    const { data } = await client.query({
+      query: GET_USER_BOOKS,
+      variables: { userId },
+      context: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      fetchPolicy: 'no-cache',
+    });
+
+    return { success: true, books: data.booksByUser };
+  } catch (error) {
+    console.error("❌ Error fetching books by user:", error.message);
+    return { success: false, error: error.message };
+  }
+}
+
 
 export const updateBookById = async (id, bookData) => {
   try {

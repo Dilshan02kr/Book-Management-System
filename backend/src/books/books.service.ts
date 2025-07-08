@@ -16,6 +16,14 @@ export class BooksService {
     return book;
   }
 
+  getBooksByUser(userId: string): Book[] {
+    const userBooks = this.books.filter((book) => book.userId === userId);
+    if (userBooks.length === 0) {
+      throw new NotFoundException(`No books found for user with id ${userId}`);
+    }
+    return userBooks;
+  }
+
   addBook(addBookInput: AddBookInput): Book {
     const newBook: Book = {
       id: Date.now().toString(),

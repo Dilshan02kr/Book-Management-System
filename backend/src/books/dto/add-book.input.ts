@@ -3,6 +3,9 @@ import { InputType, Field, Int } from '@nestjs/graphql';
 @InputType()
 export class AddBookInput {
   @Field()
+  userId: string;
+
+  @Field()
   title: string;
 
   @Field()

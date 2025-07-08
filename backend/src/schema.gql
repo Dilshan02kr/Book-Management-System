@@ -4,6 +4,7 @@
 
 type Book {
   id: ID!
+  userId: String!
   title: String!
   author: String!
   year: Int!
@@ -24,6 +25,7 @@ type AuthPayload {
 type Query {
   books: [Book!]!
   book(id: ID!): Book!
+  booksByUser(userId: ID!): [Book!]!
   users: [User!]!
 }
 
@@ -36,6 +38,7 @@ type Mutation {
 }
 
 input AddBookInput {
+  userId: String!
   title: String!
   author: String!
   year: Int!

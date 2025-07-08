@@ -4,6 +4,7 @@ export const ADD_BOOK = gql`
   mutation AddBook($data: AddBookInput!) {
     addBook(data: $data) {
       id
+      userId
       title
       author
       year
