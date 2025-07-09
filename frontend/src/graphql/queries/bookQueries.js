@@ -32,6 +32,7 @@ export const GET_BOOK_BY_ID = gql`
       author
       year
       genre
+      summary
     }
   }
 `;

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import LoadingEffect from "@/components/loadingEffect/loadingEffect";
+import MyButton from "@/components/myButton/MyButton";
 
 export default function Page({ params }) {
   const { id } = use(params);
@@ -52,7 +53,7 @@ export default function Page({ params }) {
 
   return (
     <Container maxWidth="sm">
-      <Box className="book-details-container" mt={6}>
+      <Box className="details-container" mt={6}>
         <Typography variant="h4" gutterBottom>
           📖 Book Details
         </Typography>
@@ -76,6 +77,9 @@ export default function Page({ params }) {
             <Typography>
               <strong>Genre:</strong> {book.genre}
             </Typography>
+            <Typography className="summary-text">
+              <strong>Summary:</strong> {book.summary}
+            </Typography>
 
             <Box mt={4} display="flex" justifyContent="space-between">
               <Link href={`/books/${book.id}/update`}>
@@ -91,9 +95,7 @@ export default function Page({ params }) {
         )}
         <Box mt={4} textAlign="center">
           <Link href="/books">
-            <Button variant="contained" color="secondary">
-              ⬅ Back to Books
-            </Button>
+            <MyButton name="⬅ Back to Books" />
           </Link>
         </Box>
       </Box>

@@ -39,6 +39,7 @@ export default function AuthForm({
         <form onSubmit={onSubmit}>
           <Box display="flex" flexDirection="column" gap={3}>
             <TextField
+             className="mui-text-field"
               label="Username"
               name="username"
               value={formData.username}
@@ -47,6 +48,7 @@ export default function AuthForm({
               fullWidth
             />
             <TextField
+             className="mui-text-field"
               label="Password"
               name="password"
               type="password"

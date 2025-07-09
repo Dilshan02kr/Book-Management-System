@@ -4,6 +4,7 @@ import { Typography, Container, Box, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import AuthNavIcon from '@/components/authNavIcon/AuthNavIcon';
+import MyButton from '@/components/myButton/MyButton';
 
 export default function Page() {
   const router = useRouter();
@@ -36,9 +37,7 @@ export default function Page() {
           Easily manage your books with create, update, and search features.
         </Typography>
         <Box mt={4}>
-          <Button variant="contained" color="primary" onClick={handleGoToBooks}>
-            Go to Book List
-          </Button>
+          <MyButton name="Go to Book List" onClick={handleGoToBooks} />
         </Box>
       </Box>
     </Container>

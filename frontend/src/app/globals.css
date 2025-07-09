@@ -5,7 +5,7 @@
 body {
   font-family: var(--font-roboto);
   margin: 0;
-  background-color: #f4f6f8;
+  background-color: #f5f5f5;
   color: #333;
 }
 
@@ -71,4 +71,30 @@ body {
     transform: translateX(0);
   }
 }
+
+.myButton{
+  background-color: #17B8A6 !important;
+}
+
+.myButton:hover{
+  background-color: #139B8E !important;
+}
+
+.mui-text-field label.Mui-focused {
+  color: #17B8A6;
+}
+
+.mui-text-field .MuiOutlinedInput-root {
+  transition: border-color 0.3s;
+}
+
+.mui-text-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #17B8A6;
+}
+
+.summary-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 

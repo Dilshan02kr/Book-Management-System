@@ -18,7 +18,6 @@ export const addBook = async (bookData) => {
 
     return { success: true, book: result.data.addBook };
   } catch (error) {
-    console.error("❌ Error adding book:", error.message);
     return { success: false, error: error.message };
   }
 };
@@ -39,7 +38,6 @@ export const getBooks = async () => {
 
     return { success: true, books: data.books };
   } catch (error) {
-    console.error("❌ Error fetching books:", error.message);
     return { success: false, error: error.message };
   }
 };
@@ -60,7 +58,6 @@ export const getBookById = async (id) => {
 
     return { success: true, book: data.book };
   } catch (error) {
-    console.error("❌ Error fetching book by ID:", error.message);
     return { success: false, error: error.message };
   }
 };
@@ -82,7 +79,6 @@ export const getBooksByUser = async (userId) => {
     return { success: true, books: data.booksByUser };
   }
    catch (error) {
-    console.error("❌ Error fetching books by user:", error.message);
     return { success: false, error: error.message };
   }
 }
@@ -104,7 +100,6 @@ export const updateBookById = async (id, bookData) => {
 
     return { success: true, book: result.data.updateBook };
   } catch (error) {
-    console.error("❌ Error updating book:", error.message);
     return { success: false, error: error.message };
   }
 };
@@ -125,7 +120,6 @@ export const deleteBookById = async (id) => {
 
     return { success: true };
   } catch (error) {
-    console.error("❌ Error deleting book:", error.message);
     return { success: false, error: error.message };
   }
 };
