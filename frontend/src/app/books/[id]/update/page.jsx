@@ -8,7 +8,6 @@ import { cleanApolloInput } from "@/utils/cleanApolloInput";
 import {
   Alert,
   Box,
-  CircularProgress,
   Container,
   Typography,
 } from "@mui/material";
@@ -60,7 +59,7 @@ function page({ params }) {
       setAlert({
         show: true,
         type: "error",
-        message: "❌ Error: " + result.error,
+        message: "❌ Failed to update the book! ",
       });
       setError(result.error);
        setBtnLoading(false);

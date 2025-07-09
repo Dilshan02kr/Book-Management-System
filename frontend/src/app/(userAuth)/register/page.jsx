@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AuthForm from "@/components/authForm/AuthForm";
 import { registerUser } from "@/services/authService";
+import CustomAlert from "@/components/customAlert/CustomAlert";
+import { Container } from "@mui/material";
 
 export default function Page() {
   const router = useRouter();
@@ -11,30 +13,58 @@ export default function Page() {
     username: "",
     password: "",
   });
-  const [error, setError] = useState('');
+
+  const [loading, setLoading] = useState(false);
+
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const result = await registerUser(formData);
 
     if (result.success) {
-      setTimeout(() => router.push('/login'), 1500);
+      setAlert({
+        show: true,
+        type: "success",
+        message: "✅ Registration successful!",
+      });
+      setTimeout(() => {
+        setLoading(false);
+        router.push("/login");
+      }, 1500);
     } else {
-      setError('❌ Registration failed. Username might be taken.');
+      setAlert({
+        show: true,
+        type: "error",
+        message: "❌ Registration failed. Username might be taken.",
+      });
+      setLoading(false);
     }
   };
 
   return (
-    <AuthForm
-      title="📝 Register"
-      formData={formData}
-      setFormData={setFormData}
-      onSubmit={handleSubmit}
-      buttonText="Register"
-      bottomText="Already have an account?"
-      linkText="Log in"
-      linkHref="/login"
-    />
+    <Container maxWidth="sm">
+      {alert.show && (
+        <CustomAlert
+          type={alert.type}
+          message={alert.message}
+          duration={3000}
+          onClose={() => setAlert({ show: false, type: "", message: "" })}
+        />
+      )}
+
+      <AuthForm
+        title="📝 Register"
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={handleSubmit}
+        buttonText="Register"
+        bottomText="Already have an account?"
+        linkText="Log in"
+        linkHref="/login"
+        loading={loading}
+      />
+    </Container>
   );
 }

@@ -14,7 +14,9 @@ import {
   Pagination,
   Alert,
   TextField,
+  InputAdornment,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import { getBooksByUser } from "@/services/bookService";
 import LoadingEffect from "@/components/loadingEffect/loadingEffect";
@@ -86,12 +88,19 @@ export default function Page() {
         <Box>
           <Box mb={3}>
             <TextField
-              label="Search books"
+              label="Search"
               variant="outlined"
               fullWidth
+              placeholder="Title, author, or genre"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              placeholder="Search by title, author, or genre"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Box>
 

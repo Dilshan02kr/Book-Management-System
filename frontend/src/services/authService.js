@@ -19,7 +19,6 @@ export const registerUser = async (formData) => {
       return { success: false, error: 'Registration failed' };
     }
   } catch (error) {
-    console.error('Registration Error:', error);
     return { success: false, error };
   }
 };
@@ -42,7 +41,6 @@ export const loginUser = async (formData) => {
 
     return { success: true, token, user };
   } catch (error) {
-    console.error('Login Error:', error);
     return { success: false, error };
   }
 };
