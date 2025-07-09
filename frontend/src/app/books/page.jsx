@@ -76,7 +76,7 @@ export default function Page() {
       <AuthNavIcon />
 
       <Container maxWidth="md">
-        <Box mt={6} mb={4} textAlign="center">
+        <Box mt={6} mb={4} textAlign="center" className="page-header">
           <Typography variant="h3" gutterBottom>
             📚 My Books
           </Typography>
@@ -88,6 +88,7 @@ export default function Page() {
         <Box>
           <Box mb={3}>
             <TextField
+            className="mui-text-field"
               label="Search"
               variant="outlined"
               fullWidth
@@ -140,7 +141,7 @@ export default function Page() {
                   count={totalPages}
                   page={currentPage}
                   onChange={handlePageChange}
-                  color="primary"
+                  className="pagination"
                 />
               </Box>
             </>

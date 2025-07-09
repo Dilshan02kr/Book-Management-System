@@ -46,14 +46,14 @@ export default function AuthNavIcon() {
       alignItems="center"
       gap={1}
     >
-      <Typography variant="body1" color={isLoggedIn ? 'green' : 'gray'}>
-        {isLoggedIn ? username : 'Log in'}
+      <Typography variant="body1" color={isLoggedIn ? '#17B8A6' : 'gray'}>
+        {isLoggedIn ? `Welcome, ${username}` : 'Log in'}
       </Typography>
       <Tooltip title={isLoggedIn ? 'Logout' : 'Login'}>
         <IconButton
           onClick={isLoggedIn ? handleLogout : handleLogin}
           sx={{
-            color: isLoggedIn ? 'red' : 'green',
+            color: isLoggedIn ? 'red' : '#17B8A6',
           }}
         >
           {isLoggedIn ? <LogoutIcon /> : <LoginIcon />}

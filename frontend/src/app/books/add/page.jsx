@@ -21,7 +21,7 @@ export default function Page() {
       setAlert({
         show: true,
         type: "success",
-        message: "✅ Book added successfully!",
+        message: "Book added successfully!",
       });
       setTimeout(() => {
         setLoading(false);
@@ -31,7 +31,7 @@ export default function Page() {
       setAlert({
         show: true,
         type: "error",
-        message: "❌ Failed to add the book! ",
+        message: "Failed to add the book! ",
       });
       setLoading(false);
     }

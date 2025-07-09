@@ -9,6 +9,7 @@ type Book {
   author: String!
   year: Int!
   genre: String!
+  summary: String!
 }
 
 type User {
@@ -43,6 +44,7 @@ input AddBookInput {
   author: String!
   year: Int!
   genre: String!
+  summary: String!
 }
 
 input RegisterInput {

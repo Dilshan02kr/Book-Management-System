@@ -16,4 +16,7 @@ export class AddBookInput {
 
   @Field()
   genre: string;
+
+  @Field()
+  summary: string;
 }

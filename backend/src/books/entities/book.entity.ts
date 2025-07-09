@@ -19,4 +19,7 @@ export class Book {
 
   @Field()
   genre: string;
+
+  @Field()
+  summary: string;
 }
