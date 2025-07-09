@@ -6,6 +6,7 @@ import AuthForm from "@/components/authForm/AuthForm";
 import { loginUser } from "@/services/authService";
 import { Container } from "@mui/material";
 import CustomAlert from "@/components/customAlert/CustomAlert";
+import BackButton from "@/components/backButton/BackButton";
 
 export default function Page() {
   const router = useRouter();
@@ -18,8 +19,6 @@ export default function Page() {
 
   const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
-  const [error, setError] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,7 +30,7 @@ export default function Page() {
       setAlert({
         show: true,
         type: "success",
-        message: "✅ Login successful!",
+        message: "Login successful!",
       });
       setTimeout(() => {
         setLoading(false);
@@ -41,7 +40,7 @@ export default function Page() {
       setAlert({
         show: true,
         type: "error",
-        message: "❌ Invalid username or password",
+        message: "Invalid username or password",
       });
       setLoading(false);
     }
@@ -58,6 +57,7 @@ export default function Page() {
         />
       )}
 
+      <BackButton />
       <AuthForm
         title="🔐 Login"
         formData={formData}

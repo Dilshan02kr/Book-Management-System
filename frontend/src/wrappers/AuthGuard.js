@@ -7,7 +7,7 @@ import useAuth from "@/hooks/useAuth";
 import { Box, Typography, CircularProgress } from "@mui/material";
 import LoadingEffect from "@/components/loadingEffect/loadingEffect";
 
-function AuthGuard({ children }) {
+function AuthGuard({ children, isLoadingNeed=true }) {
   const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
 
@@ -21,7 +21,7 @@ function AuthGuard({ children }) {
     <Box position="fixed" top={0} left={0} right={0} bottom={0}>
       {children}
 
-      {loading && (
+      {loading && isLoadingNeed && (
         <div
           style={{
             position: "absolute",

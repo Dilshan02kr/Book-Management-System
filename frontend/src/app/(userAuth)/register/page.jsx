@@ -6,6 +6,7 @@ import AuthForm from "@/components/authForm/AuthForm";
 import { registerUser } from "@/services/authService";
 import CustomAlert from "@/components/customAlert/CustomAlert";
 import { Container } from "@mui/material";
+import BackButton from "@/components/backButton/BackButton";
 
 export default function Page() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function Page() {
       setAlert({
         show: true,
         type: "success",
-        message: "✅ Registration successful!",
+        message: "Registration successful!",
       });
       setTimeout(() => {
         setLoading(false);
@@ -37,7 +38,7 @@ export default function Page() {
       setAlert({
         show: true,
         type: "error",
-        message: "❌ Registration failed. Username might be taken.",
+        message: "Registration failed. Username might be taken.",
       });
       setLoading(false);
     }
@@ -53,6 +54,8 @@ export default function Page() {
           onClose={() => setAlert({ show: false, type: "", message: "" })}
         />
       )}
+
+      <BackButton />
 
       <AuthForm
         title="📝 Register"

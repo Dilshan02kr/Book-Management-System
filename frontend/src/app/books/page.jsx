@@ -22,6 +22,7 @@ import { getBooksByUser } from "@/services/bookService";
 import LoadingEffect from "@/components/loadingEffect/loadingEffect";
 import EmptyMessage from "@/components/emptyMessage/EmptyMessage";
 import MyButton from "@/components/myButton/MyButton";
+import BackButton from "@/components/backButton/BackButton";
 
 export default function Page() {
   const [books, setBooks] = useState([]);
@@ -85,10 +86,12 @@ export default function Page() {
           </Typography>
         </Box>
 
+        <BackButton />
+
         <Box>
           <Box mb={3}>
             <TextField
-            className="mui-text-field"
+              className="mui-text-field"
               label="Search"
               variant="outlined"
               fullWidth
@@ -109,7 +112,7 @@ export default function Page() {
 
           {error && <Alert severity="error">{error}</Alert>}
 
-          {!loading && !error && books.length === 0 && (
+          {!loading && !error && currentBooks.length === 0 && (
             <EmptyMessage text="No books found." />
           )}
 
