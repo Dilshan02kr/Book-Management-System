@@ -34,7 +34,7 @@ export default function Page() {
           📚 Welcome to Book Management System
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Easily manage your books with create, update, and search features.
+          You can manage your book store — add, update, and remove books easily.
         </Typography>
         <Box mt={4}>
           <MyButton name="Go to Book List" onClick={handleGoToBooks} />

@@ -1,10 +1,12 @@
 "use client";
 
+import BackButton from "@/components/backButton/BackButton";
 import BookForm from "@/components/bookForm/BookForm";
 import CustomAlert from "@/components/customAlert/CustomAlert";
 import LoadingEffect from "@/components/loadingEffect/loadingEffect";
 import { getBookById, updateBookById } from "@/services/bookService";
 import { cleanApolloInput } from "@/utils/cleanApolloInput";
+import AuthGuard from "@/wrappers/AuthGuard";
 import {
   Alert,
   Box,
@@ -49,7 +51,7 @@ function page({ params }) {
       setAlert({
         show: true,
         type: "success",
-        message: "✅ Book updated successfully!",
+        message: "Book updated successfully!",
       });
       setTimeout(() => {
         setBtnLoading(false);
@@ -59,7 +61,7 @@ function page({ params }) {
       setAlert({
         show: true,
         type: "error",
-        message: "❌ Failed to update the book! ",
+        message: "Failed to update the book! ",
       });
       setError(result.error);
        setBtnLoading(false);
@@ -67,7 +69,10 @@ function page({ params }) {
   };
 
   return (
-    <Container maxWidth="sm">
+
+<AuthGuard isLoadingNeed={false}>
+
+      <Container maxWidth="sm">
       {alert.show && (
         <CustomAlert
           type={alert.type}
@@ -76,6 +81,9 @@ function page({ params }) {
           onClose={() => setAlert({ show: false, type: "", message: "" })}
         />
       )}
+
+      <BackButton link={`/books/${id}`} />
+
       <Box mt={6} mb={4} textAlign="center">
         <Typography variant="h4" gutterBottom>
           ✏️ Update Book
@@ -94,6 +102,9 @@ function page({ params }) {
         />
       )}
     </Container>
+</AuthGuard>
+
+
   );
 }
 

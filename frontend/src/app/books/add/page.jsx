@@ -6,6 +6,8 @@ import { addBook } from "@/services/bookService";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CustomAlert from "@/components/customAlert/CustomAlert";
+import AuthGuard from "@/wrappers/AuthGuard";
+import BackButton from "@/components/backButton/BackButton";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,10 @@ export default function Page() {
   };
 
   return (
-    <Container maxWidth="sm">
+
+<AuthGuard isLoadingNeed={true}>
+
+ <Container maxWidth="sm">
       {alert.show && (
         <CustomAlert
           type={alert.type}
@@ -47,12 +52,20 @@ export default function Page() {
           onClose={() => setAlert({ show: false, type: "", message: "" })}
         />
       )}
+
+      <BackButton link="/books" />
+
       <Box mt={6} mb={4} textAlign="center">
+
         <Typography variant="h4" gutterBottom>
           ➕ Add New Book
         </Typography>
       </Box>
       <BookForm onSubmit={handleAddBook} loading={loading} />
     </Container>
+
+</AuthGuard>
+
+   
   );
 }

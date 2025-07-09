@@ -89,7 +89,7 @@ export default function BookForm({
         />
 
         <MyButton
-          name={isEdit ? "✏️ Update Book" : "📥 Add Book"}
+          name={isEdit ? "✏️ Update Book" : "➕ Add Book"}
           type="submit"
           loading={loading}
         />
