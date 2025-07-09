@@ -8,6 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import Link from "next/link";
+import MyButton from "../myButton/MyButton";
 
 export default function AuthForm({
   title,
@@ -17,7 +18,8 @@ export default function AuthForm({
   buttonText,
   bottomText,
   linkText,
-  linkHref
+  linkHref,
+  loading=false
 }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,9 +55,9 @@ export default function AuthForm({
               required
               fullWidth
             />
-            <Button type="submit" variant="contained" color="primary">
-              {buttonText}
-            </Button>
+
+            <MyButton name={buttonText} loading={loading} type="submit" />
+           
           </Box>
         </form>
 

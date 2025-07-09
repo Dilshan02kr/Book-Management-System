@@ -9,7 +9,7 @@ import CustomAlert from "@/components/customAlert/CustomAlert";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
   const router = useRouter();
 
@@ -18,13 +18,21 @@ export default function Page() {
     const result = await addBook(data);
 
     if (result.success) {
-      setAlert({ show: true, type: 'success', message: '✅ Book added successfully!' });
+      setAlert({
+        show: true,
+        type: "success",
+        message: "✅ Book added successfully!",
+      });
       setTimeout(() => {
         setLoading(false);
-        router.push('/books')
-      }, 1000);
+        router.push("/books");
+      }, 1500);
     } else {
-      setAlert({ show: true, type: 'error', message: "❌ Error: " + result.error });
+      setAlert({
+        show: true,
+        type: "error",
+        message: "❌ Failed to add the book! ",
+      });
       setLoading(false);
     }
   };
@@ -36,7 +44,7 @@ export default function Page() {
           type={alert.type}
           message={alert.message}
           duration={3000}
-          onClose={() => setAlert({ show: false, type: '', message: '' })}
+          onClose={() => setAlert({ show: false, type: "", message: "" })}
         />
       )}
       <Box mt={6} mb={4} textAlign="center">
